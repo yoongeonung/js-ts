@@ -45,7 +45,7 @@ function showCompleted(): Todo[] {
 }
 
 // TODO: 아래 함수의 내용을 채워보세요. 아래 함수는 `addTodo()` 함수를 이용하여 2개의 새 할 일을 추가하는 함수입니다.
-function addTwoTodoItems() {
+function addTwoTodoItems(): void {
   // addTodo() 함수를 두 번 호출하여 todoItems에 새 할 일이 2개 추가되어야 합니다.
   for (let i = 1; i < 3; i++) {
     addTodo({
