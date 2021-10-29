@@ -5,3 +5,4 @@ a = 'a';
 let b = a as string;
 
 // DOM API
+let div = document.querySelector('div') as HTMLDivElement;
