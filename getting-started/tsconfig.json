@@ -1,7 +1,0 @@
-{
-  "compilerOptions": {
-    "allowJs": true, // 프로젝트내 자바스크립트를 허용
-    "checkJs": true, // @tscheck와 유사한 기능 -> js에 먹히는 옵션
-    "noImplicitAny": true // 최소한 any라는 타입이라도 부여해야한다
-  }
-}
