@@ -1,0 +1,17 @@
+body {
+    margin: 300px auto;
+    width: 80%;
+    text-align: center;
+}
+
+input {
+    width: 50%;
+}
+
+.hidden {
+    display: none;
+}
+
+#greeting {
+    color: blue;
+}
