@@ -5,6 +5,7 @@ body {
 }
 
 input {
+    margin: 30px 0;
     width: 50%;
 }
 
@@ -13,5 +14,13 @@ input {
 }
 
 #greeting {
-    color: blue;
+    font-size: 35px;
+    color: black;
+    font-weight: lighter;
+}
+
+#clock {
+    color: cadetblue;
+    font-size: 100px;
+    font-weight: bolder;
 }
