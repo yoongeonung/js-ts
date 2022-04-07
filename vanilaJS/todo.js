@@ -15,28 +15,28 @@ const onClickedDeleteBtn = event => {
     saveTodoItemsToLocalStorage();
 };
 
-const createLi = todoObj => {
+const createLi = id => {
     const li = document.createElement("li");
-    li.id = todoObj.id;
+    li.id = id;
     return li;
 };
 
-const createSpan = todoObj => {
+const createSpan = text => {
     const span = document.createElement("span");
-    span.innerText = todoObj.text;
+    span.innerText = text;
     return span;
 };
 
 const createDeleteBtn = () => {
     const deleteBtn = document.createElement("button");
-    deleteBtn.innerText = "🧑🏻‍💻";
+    deleteBtn.innerText = "☠️";
     deleteBtn.addEventListener("click", onClickedDeleteBtn);
     return deleteBtn;
 };
 
-const paintTodoItem = todoObj => {
-    const li = createLi(todoObj);
-    const span = createSpan(todoObj);
+const paintTodoItem = ({id,text}) => {
+    const li = createLi(id);
+    const span = createSpan(text);
     const deleteBtn = createDeleteBtn();
 
     li.appendChild(span);
@@ -53,11 +53,10 @@ const hideInputText = () => {
 const createTodoItem = () => {
     const inputValue = getInputValue();
     hideInputText();
-    const todoObj = {
+    return {
         text: inputValue,
         id: Date.now(),
-    }
-    return todoObj;
+    };
 };
 
 const handleSubmit = (event) => {
@@ -68,14 +67,17 @@ const handleSubmit = (event) => {
     saveTodoItemsToLocalStorage();
 }
 
-const main = () => {
-    form.addEventListener("submit", handleSubmit);
-
+function hasTodoItemInLocalStorage() {
     const getTodoItemsToLocalStorage = localStorage.getItem("todos");
     if (getTodoItemsToLocalStorage !== null) {
         todoItems = JSON.parse(getTodoItemsToLocalStorage);
         todoItems.forEach((todoItem) => paintTodoItem(todoItem));
     }
+}
+
+const main = () => {
+    form.addEventListener("submit", handleSubmit);
+    hasTodoItemInLocalStorage();
 }
 
 main();
