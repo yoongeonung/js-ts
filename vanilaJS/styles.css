@@ -12,6 +12,12 @@ input {
     width: 50%;
 }
 
+ul {
+    color: white;
+    list-style-type: none;
+
+}
+
 .hidden {
     display: none;
 }
@@ -26,4 +32,8 @@ input {
     color: white;
     font-size: 100px;
     font-weight: bolder;
+}
+
+#quote {
+    color: white;
 }
