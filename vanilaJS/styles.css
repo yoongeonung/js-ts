@@ -37,3 +37,8 @@ ul {
 #quote {
     color: white;
 }
+
+#weather {
+    color: white;
+    font-size: 35px;
+}
