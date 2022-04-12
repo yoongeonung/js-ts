@@ -1,3 +1,4 @@
+
 const weather = document.querySelector("#weather");
 const API_KEY = config.API_KEY;
 
@@ -20,6 +21,7 @@ const success = async (pos) => {
     latitude = coords.latitude;
     longitude = coords.longitude;
     const weatherInfo = await getWeatherInfo();
+    console.log(weatherInfo);
     printWeatherInfo(weatherInfo);
 }
 

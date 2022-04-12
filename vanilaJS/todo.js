@@ -8,13 +8,6 @@ const saveTodoItemsToLocalStorage = () => {
     localStorage.setItem("todos", JSON.stringify(todoItems));
 };
 
-const onClickedDeleteBtn = event => {
-    const parentElementLi = event.target.parentElement;
-    parentElementLi.remove();
-    todoItems = todoItems.filter((wantToDeleteLi) => wantToDeleteLi.id !== parseInt(parentElementLi.id));
-    saveTodoItemsToLocalStorage();
-};
-
 const createLi = id => {
     const li = document.createElement("li");
     li.id = id;
@@ -25,6 +18,13 @@ const createSpan = text => {
     const span = document.createElement("span");
     span.innerText = text;
     return span;
+};
+
+const onClickedDeleteBtn = event => {
+    const parentElementLi = event.target.parentElement;
+    parentElementLi.remove();
+    todoItems = todoItems.filter((wantToDeleteLi) => wantToDeleteLi.id !== parseInt(parentElementLi.id));
+    saveTodoItemsToLocalStorage();
 };
 
 const createDeleteBtn = () => {
