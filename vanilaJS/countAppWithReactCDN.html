@@ -1,29 +1,34 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Document</title>
 </head>
 <body>
-    <div id="root"></div>
+<div id="root"></div>
 </body>
 <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
-    const root = document.querySelector("#root")
+    const root = document.querySelector("#root");
+    const Btn = ({banana}) => {
+        return <button style={{
+            backgroundColor: "tomato",
+            color: "white",
+            padding: "10px, 20px",
+            border: 0,
+            borderRadius: 10,
+        }}>{banana}</button>;
+    }
     const App = () => {
-        let [data, setData] = React.useState(0);
-        const countUp = () => {
-            setData(data => data+1);
-        }
         return (
             <div>
-                <h3>Total Clicks : {data}</h3>
-                <button onClick={countUp}>Click me!</button>
+                <Btn banana="Save change"/>
+                <Btn banana="Confirm"/>
             </div>
         );
     };
-    ReactDOM.render(<App />,root)
+    ReactDOM.render(<App/>, root);
 </script>
 </html>
