@@ -7,25 +7,38 @@
 <body>
 <div id="root"></div>
 </body>
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
 <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
     const root = document.querySelector("#root");
-    const Btn = ({banana}) => {
-        return <button style={{
-            backgroundColor: "tomato",
-            color: "white",
-            padding: "10px, 20px",
-            border: 0,
-            borderRadius: 10,
-        }}>{banana}</button>;
+    const Btn = ({banana, onClick, fontSize}) => {
+        console.log(banana, "is rendered")
+        return <button
+            onClick={onClick}
+            style={{
+                fontSize,
+                backgroundColor: "tomato",
+                color: "white",
+                padding: "10px, 20px",
+                border: 0,
+                borderRadius: 10,
+            }}>{banana}</button>;
     }
+    Btn.propTypes = {
+        banana: PropTypes.string,
+        onClikc: PropTypes.func,
+        fontSize: PropTypes.number
+    }
+    const MemorizedBtn = React.memo(Btn);
     const App = () => {
+        const [value, setValue] = React.useState("Save change")
+        const changeValue = () => setValue("Revert Change");
         return (
             <div>
-                <Btn banana="Save change"/>
-                <Btn banana="Confirm"/>
+                <MemorizedBtn banana={value} onClick={changeValue} fontSize={18}/>
+                <MemorizedBtn banana="Confirm" fontSize={18}/>
             </div>
         );
     };
