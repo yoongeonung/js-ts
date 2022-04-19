@@ -1,13 +1,19 @@
-import Button from "./Button";
-import styles from "./App.module.css"
+import {useCallback, useEffect, useMemo, useState} from "react";
 
 function App() {
-  return (
-    <div>
-      <h1 className={styles.title}>Welcome Back to React!!</h1>
-        <Button text={"Click"}/>
-    </div>
-  );
+    const [counter, setCounter] = useState(0)
+    const onClick = () => setCounter(prev => prev + 1);
+    console.log("I Run Every Time");
+    const iRunOnlyOnce = () => {
+        console.log("I Run Only Once");
+    }
+    useEffect(iRunOnlyOnce, []);
+    return (
+        <div>
+            <h1>{counter}</h1>
+            <button onClick={onClick}>Up!</button>
+        </div>
+    );
 }
 
 export default App;
