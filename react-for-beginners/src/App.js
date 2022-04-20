@@ -1,23 +1,24 @@
 import {useEffect, useState} from "react";
 
-function App() {
-    const [counter, setCounter] = useState(0)
-    const [keyword, setKeyword] = useState("");
-    const onChange = (e) => setKeyword(e.target.value);
-    const onClick = () => setCounter(prev => prev + 1);
-    console.log("I Run Every Time");
-    const iRunOnlyOnce = () => {
-        console.log("I Run Only Once");
-    }
-    useEffect(iRunOnlyOnce, []);
+
+const Hello = () => {
     useEffect(() => {
-        console.log("hahah");
-    }, [keyword]);
+        console.log("created!");
+        return (
+            () => console.log("destroyed!")
+        );
+    }, []);
+    return (
+        <h1>Hello!</h1>);
+};
+
+function App() {
+    const [showing, setShowing] = useState(false);
+    const onClick = () => setShowing(prev => !prev)
     return (
         <div>
-            <input onChange={onChange} placeholder="Search Here" value={keyword}/>
-            <h1>{counter}</h1>
-            <button onClick={onClick}>Up!</button>
+            {showing ? <Hello /> : null}
+            <button onClick={onClick}>{showing ? "Hide" : "Show"}</button>
         </div>
     );
 }
