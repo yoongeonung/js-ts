@@ -2,12 +2,14 @@ import {useEffect, useState} from "react";
 
 
 const Hello = () => {
-    useEffect(() => {
+    const hiFn = () => {
         console.log("created!");
-        return (
-            () => console.log("destroyed!")
-        );
-    }, []);
+        return byeFn;
+    }
+    const byeFn = () => {
+        console.log("destroyed!");
+    };
+    useEffect(hiFn, []);
     return (
         <h1>Hello!</h1>);
 };
@@ -17,7 +19,7 @@ function App() {
     const onClick = () => setShowing(prev => !prev)
     return (
         <div>
-            {showing ? <Hello /> : null}
+            {showing ? <Hello/> : null}
             <button onClick={onClick}>{showing ? "Hide" : "Show"}</button>
         </div>
     );
