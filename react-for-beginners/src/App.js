@@ -1,28 +1,36 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
-
-const Hello = () => {
-    const hiFn = () => {
-        console.log("created!");
-        return byeFn;
-    }
-    const byeFn = () => {
-        console.log("destroyed!");
-    };
-    useEffect(hiFn, []);
-    return (
-        <h1>Hello!</h1>);
-};
-
-function App() {
-    const [showing, setShowing] = useState(false);
-    const onClick = () => setShowing(prev => !prev)
-    return (
+const App = () => {
+  const [loading, setLoading] = useState(true);
+  const [coins, setCoins] = useState([]);
+  useEffect(() => {
+    fetch("https://api.coinpaprika.com/v1/tickers")
+      .then((resp) => resp.json())
+      .then((json) => {
+        setCoins(json);
+        setLoading(false);
+      });
+  }, []);
+  return (
+    <div>
+      <h1>The Coins!({coins.length})</h1>
+      {loading ? (
+        <strong>Loading...</strong>
+      ) : (
         <div>
-            {showing ? <Hello/> : null}
-            <button onClick={onClick}>{showing ? "Hide" : "Show"}</button>
+          <select>
+            {coins.map((coin) => {
+              return (
+                <option key={coin.id}>
+                  {coin.name}({coin.symbol}) : ${coin.quotes.USD.price} USD
+                </option>
+              );
+            })}
+          </select>
         </div>
-    );
-}
+      )}
+    </div>
+  );
+};
 
 export default App;
