@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
-import Movie from "./Movie";
+import React from "react";
+import { useEffect, useState } from "@types/react";
+import Movie from "../components/Movie";
 
-const App4 = () => {
+const Home = () => {
   const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
   const getMovies = async () => {
@@ -38,4 +39,4 @@ const App4 = () => {
   );
 };
 
-export default App4;
+export default Home;
