@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect, useState } from "@types/react";
+import React, { useEffect, useState } from "react";
 import Movie from "../components/Movie";
 
 const Home = () => {
@@ -25,6 +24,7 @@ const Home = () => {
           {movies.map((movie) => {
             return (
               <Movie
+                id={movie.id}
                 key={movie.id}
                 coverImg={movie.medium_cover_image}
                 title={movie.title}
