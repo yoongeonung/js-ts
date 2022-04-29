@@ -1,23 +1,28 @@
+import {createStore} from "redux";
+
 const add = document.querySelector("#add");
 const minus = document.querySelector("#minus");
 const number = document.querySelector("#number");
 
-let count = 0;
-number.innerText = count;
-
-const updateNumber = () => {
-    number.innerText = count;
+const countModifier = (state = 0, action) => {
+    console.log(action);
+    if (action.type === "ADD") {
+        return state + 1;
+    } else if (action.type === "MINUS") {
+        return state - 1;
+    } else {
+        return state;
+    }
 }
 
-const handleAdd = () => {
-    count++;
-    updateNumber();
-};
+const countStore = createStore(countModifier);
 
-const handleMinus = () => {
-    count--;
-    updateNumber();
-}
+console.log(countStore.getState());
 
-add.addEventListener("click", handleAdd);
-minus.addEventListener("click", handleMinus);
+add.addEventListener("click", () => countStore.dispatch({type: "ADD"}));
+minus.addEventListener("click", () => countStore.dispatch({type: "MINUS"}));
+
+
+countStore.subscribe(() => {
+    number.innerText = countStore.getState();
+});
