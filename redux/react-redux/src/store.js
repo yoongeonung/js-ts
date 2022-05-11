@@ -1,7 +1,9 @@
-import {createStore} from "redux";
+import {applyMiddleware, createStore} from "redux";
+import loggerMiddleware from "./lib/loggerMiddleware";
 
 const ADD = "ADD";
 const DELETE = "DELETE";
+const UPDATE = "UPDATE";
 
 const addTodo = text => {
     return {
@@ -17,22 +19,40 @@ const deleteTodo = id => {
     }
 }
 
+const updateTodo = (text,id) => {
+    return {
+        type: UPDATE,
+        text,
+        id: parseInt(id)
+    }
+}
+
 const reducer = (state = [], action) => {
-    console.log(state, action);
     switch (action.type) {
         case ADD:
             return [{text: action.text, id: Date.now()}, ...state];
         case DELETE:
             return state.filter(todo => todo.id !== action.id);
+        case UPDATE:
+            return state.map(todo => {
+                if (todo.id === action.id) {
+                    return {
+                        ...todo,
+                        text: action.text === "" ? todo.text : action.text,
+                    }
+                }
+                return todo;
+            })
         default:
             return state;
     }
 };
 
-const store = createStore(reducer);
+const store = createStore(reducer, applyMiddleware(loggerMiddleware));
 
 export const actionCreator = {
     addTodo,
-    deleteTodo
+    deleteTodo,
+    updateTodo
 }
 export default store;

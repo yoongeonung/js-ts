@@ -15,9 +15,9 @@ const Home = ({todos, addTodo}) => {
     }
     return (
         <>
-            <h1>Todo List</h1>
+            <h1>Todoリスト</h1>
             <form onSubmit={onSubmit}>
-                <input type="text" placeholder="please write your todos" value={text} onChange={onChange}/>
+                <input type="text" placeholder="やるべき事を書いてね" value={text} onChange={onChange}/>
             </form>
             <ul>
                 {todos.map(todo => <Todo {...todo} key={todo.id}/>)}
