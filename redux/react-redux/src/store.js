@@ -1,58 +1,33 @@
-import {applyMiddleware, createStore} from "redux";
-import loggerMiddleware from "./lib/loggerMiddleware";
+import {configureStore, createSlice} from "@reduxjs/toolkit";
 
-const ADD = "ADD";
-const DELETE = "DELETE";
-const UPDATE = "UPDATE";
-
-const addTodo = text => {
-    return {
-        type : ADD,
-        text
-    }
-}
-
-const deleteTodo = id => {
-    return {
-        type: DELETE,
-        id: parseInt(id)
-    }
-}
-
-const updateTodo = (text,id) => {
-    return {
-        type: UPDATE,
-        text,
-        id: parseInt(id)
-    }
-}
-
-const reducer = (state = [], action) => {
-    switch (action.type) {
-        case ADD:
-            return [{text: action.text, id: Date.now()}, ...state];
-        case DELETE:
-            return state.filter(todo => todo.id !== action.id);
-        case UPDATE:
+const todos = createSlice({
+    name: "todosReducer",
+    initialState: [],
+    reducers: {
+        addTodo: (state, action) => {
+            state.push({text: action.payload, id: Date.now()});
+        },
+        deleteTodo: (state, action) => {
+            return state.filter(todo => todo.id !== action.payload);
+        },
+        updateTodo: (state, action) => {
             return state.map(todo => {
-                if (todo.id === action.id) {
+                if (todo.id === parseInt(action.payload.id)) {
                     return {
                         ...todo,
-                        text: action.text === "" ? todo.text : action.text,
+                        text: action.payload.text === "" ? todo.text : action.payload.text,
                     }
                 }
                 return todo;
-            })
-        default:
-            return state;
+            });
+        }
     }
-};
+});
 
-const store = createStore(reducer, applyMiddleware(loggerMiddleware));
-
-export const actionCreator = {
+export const {
     addTodo,
     deleteTodo,
     updateTodo
-}
-export default store;
+} = todos.actions;
+
+export default configureStore({reducer: todos.reducer});

@@ -14,26 +14,31 @@
 <script type="text/babel">
     const root = document.querySelector("#root");
     const Btn = ({banana, onClick, fontSize}) => {
-        console.log(banana, "is rendered")
-        return <button
-            onClick={onClick}
-            style={{
-                fontSize,
-                backgroundColor: "tomato",
-                color: "white",
-                padding: "10px, 20px",
-                border: 0,
-                borderRadius: 10,
-            }}>{banana}</button>;
-    }
+        console.log(banana, "is rendered");
+        return (
+            <button
+                onClick={onClick}
+                style={{
+                    fontSize,
+                    backgroundColor: "tomato",
+                    color: "white",
+                    padding: "10px, 20px",
+                    border: 0,
+                    borderRadius: 10,
+                }}
+            >
+                {banana}
+            </button>
+        );
+    };
     Btn.propTypes = {
         banana: PropTypes.string,
         onClikc: PropTypes.func,
-        fontSize: PropTypes.number
-    }
+        fontSize: PropTypes.number,
+    };
     const MemorizedBtn = React.memo(Btn);
     const App = () => {
-        const [value, setValue] = React.useState("Save change")
+        const [value, setValue] = React.useState("Save change");
         const changeValue = () => setValue("Revert Change");
         return (
             <div>

@@ -18,7 +18,7 @@ const person: object = {
     name: "capt",
     age: 100
 };
-const people: {name:string, age:number} = {
+const people: {name:string; age:number} = {
     name: "capt",
     age: 100
 }
