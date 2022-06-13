@@ -1,24 +1,21 @@
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 
 function App() {
-    const Father = styled.div`
+    const Wrapper = styled.div`
+      width: 100vw;
+      height: 100vh;
       display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: ${props => props.theme.backgroundColor};
     `;
-    const Box = styled.div`
-      background-color: ${props => props.bgColor};
-      width: 100px;
-      height: 100px;
+    const Title = styled.h1`
+      color: ${props => props.theme.textColor};
     `;
-    const Circle = styled(Box)`
-      border-radius: 50px;
-    `;
-
     return (
-        <Father>
-            <Box bgColor={"green"}/>
-            <Box bgColor={"blueviolet"}/>
-            <Circle bgColor={"whitesmoke"} />
-        </Father>
+        <Wrapper>
+            <Title>Hello</Title>
+        </Wrapper>
     )
 }
 
