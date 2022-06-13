@@ -8,5 +8,5 @@
       "dom"
     ]
   },
-  "include": ["./src/**/*"]
+  "include": ["../class-note/**/*"]
 }
