@@ -1,4 +1,4 @@
-import {Link, Outlet, Route, Routes, useLocation, useParams} from "react-router-dom";
+import {Link, Outlet, Route, Routes, useLocation, useMatch, useParams} from "react-router-dom";
 import styled from "styled-components";
 import {useEffect, useState} from "react";
 import Price from "./Price";
@@ -108,7 +108,29 @@ const OverViewItem = styled.div`
 `;
 
 const Description = styled.p`
-  margin: 20px 0px;
+  margin: 20px 0;
+`;
+
+const Tabs = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 25px 0;
+  gap: 10px;
+`;
+
+const Tab = styled.div<{ isActive: boolean }>`
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 400;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 7px 0px;
+  border-radius: 10px;
+  color: ${(props) =>
+          props.isActive ? props.theme.accentColor : props.theme.textColor};
+  a {
+    display: block;
+  }
 `;
 
 function Coin() {
@@ -117,6 +139,7 @@ function Coin() {
     const [priceInfo, setPriceInfo] = useState<PriceData>()
     const {coinId} = useParams();
     const location = useLocation();
+    const match = useMatch("/:coinId/:tabs");
     const state = location.state as RouteState;
     useEffect(() => {
         (async () => {
@@ -161,8 +184,14 @@ function Coin() {
                             <span>{priceInfo?.max_supply}</span>
                         </OverViewItem>
                     </OverView>
-                    <Link to={`/${coinId}/price`} >PRICE</Link>
-                    <Link to={`/${coinId}/chart`} >CHART</Link>
+                    <Tabs>
+                        <Tab isActive={match?.params.tabs === "price"}>
+                            <Link to={`/${coinId}/price`} >PRICE</Link>
+                        </Tab>
+                        <Tab isActive={match?.params.tabs === "chart"}>
+                            <Link to={`/${coinId}/chart`} >CHART</Link>
+                        </Tab>
+                    </Tabs>
                     <Outlet />
                 </>
             )}
