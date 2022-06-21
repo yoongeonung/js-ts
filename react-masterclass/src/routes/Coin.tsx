@@ -1,6 +1,8 @@
-import {Link, useLocation, useParams} from "react-router-dom";
+import {Link, Outlet, Route, Routes, useLocation, useParams} from "react-router-dom";
 import styled from "styled-components";
 import {useEffect, useState} from "react";
+import Price from "./Price";
+import Chart from "./Chart";
 
 const Container = styled.div`
   padding: 0 20px;
@@ -84,6 +86,31 @@ interface PriceData {
     };
 }
 
+const OverView = styled.div`
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px 20px;
+  border-radius: 10px;
+`;
+
+const OverViewItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  span:first-child {
+    font-size: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+`;
+
+const Description = styled.p`
+  margin: 20px 0px;
+`;
+
 function Coin() {
     const [loading, setLoading] = useState(true)
     const [info, setInfo] = useState<InfoData>()
@@ -92,20 +119,53 @@ function Coin() {
     const location = useLocation();
     const state = location.state as RouteState;
     useEffect(() => {
-        (async() => {
+        (async () => {
             const infoData = await (await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`)).json();
             const priceData = await (await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`)).json();
             setInfo(infoData);
             setPriceInfo(priceData);
             setLoading(false)
         })()
-    },[])
+    }, [coinId])
     return (
         <Container>
             <Header>
-                <Title>{state?.name || "Loading..."}</Title>
+                <Title>{state?.name ? state?.name : (loading ? "Loading..." : info?.name)}</Title>
             </Header>
-            {loading ? <Loader>Loading...</Loader> : null}
+            {loading ? <Loader>Loading...</Loader> : (
+                <>
+                    <OverView>
+                        <OverViewItem>
+                            <span>Rank</span>
+                            <span>{info?.rank}</span>
+                        </OverViewItem>
+                        <OverViewItem>
+                            <span>Symbol</span>
+                            <span>{info?.symbol}</span>
+                        </OverViewItem>
+                        <OverViewItem>
+                            <span>OpenSource</span>
+                            <span>{info?.open_source ? "YES" : "NO"}</span>
+                        </OverViewItem>
+                    </OverView>
+                    <Description>
+                        {info?.description}
+                    </Description>
+                    <OverView>
+                        <OverViewItem>
+                            <span>Total Suply:</span>
+                            <span>{priceInfo?.total_supply}</span>
+                        </OverViewItem>
+                        <OverViewItem>
+                            <span>Max Supply:</span>
+                            <span>{priceInfo?.max_supply}</span>
+                        </OverViewItem>
+                    </OverView>
+                    <Link to={`/${coinId}/price`} >PRICE</Link>
+                    <Link to={`/${coinId}/chart`} >CHART</Link>
+                    <Outlet />
+                </>
+            )}
         </Container>
     );
 }
