@@ -2,6 +2,9 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import {useQuery} from "react-query";
 import {fetchCoins} from "../api";
+import {Helmet} from "react-helmet";
+import {useSetRecoilState} from "recoil";
+import {isDarkAtom} from "../atoms";
 
 const Container = styled.div`
   padding: 0 20px;
@@ -21,11 +24,11 @@ const CoinsList = styled.ul`
 `;
 
 const Coin = styled.li`
-  background-color: white;
+  background-color: ${props => props.theme.cardBgColor};
+  color: ${props => props.theme.textColor};
   margin-bottom: 10px;
   border-radius: 15px;
-  color: ${props => props.theme.bgColor};
-
+  border: 1px solid white;
   a {
     padding: 20px;
     transition: color .2s ease-in;
@@ -66,21 +69,17 @@ interface CoinObj {
 }
 
 function Coins() {
-    // const [coins, setCoins] = useState<CoinObj[]>([]); //초기값을 항상 주는 습관
-    // const [loading, setLoading] = useState(true)
-    // useEffect(() => {
-    //     (async () => {
-    //         const response = await fetch("https://api.coinpaprika.com/v1/coins");
-    //         const json = await response.json();
-    //         setCoins(json.slice(0, 100))
-    //         setLoading(false)
-    //     })()
-    // }, [])
-    const {isLoading, data} = useQuery<CoinObj[]>("allCoins", fetchCoins);
+    const {isLoading, data} = useQuery<CoinObj[]>(["allCoins"], fetchCoins);
+    const setDarkAtom = useSetRecoilState(isDarkAtom);
+    const toggleDarkAtom = () => setDarkAtom(current => !current)
     return (
         <Container>
+            <Helmet>
+                <title>Coins</title>
+            </Helmet>
             <Header>
                 <Title>Coins</Title>
+                <button onClick={toggleDarkAtom}>Toggle button</button>
             </Header>
             {isLoading ? (
                 <Loader>Loading...</Loader>

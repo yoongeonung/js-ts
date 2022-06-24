@@ -1,8 +1,8 @@
-import {Link, Outlet, Route, Routes, useLocation, useMatch, useParams} from "react-router-dom";
+import {Link, Outlet, useLocation, useMatch, useParams} from "react-router-dom";
 import styled from "styled-components";
-import {useEffect, useState} from "react";
-import Price from "./Price";
-import Chart from "./Chart";
+import {useQuery} from "react-query";
+import {fetchCoinInfo, fetchTickers} from "../api";
+import Helmet from "react-helmet";
 
 const Container = styled.div`
   padding: 0 20px;
@@ -128,71 +128,84 @@ const Tab = styled.div<{ isActive: boolean }>`
   border-radius: 10px;
   color: ${(props) =>
           props.isActive ? props.theme.accentColor : props.theme.textColor};
+
   a {
     display: block;
   }
 `;
 
 function Coin() {
-    const [loading, setLoading] = useState(true)
-    const [info, setInfo] = useState<InfoData>()
-    const [priceInfo, setPriceInfo] = useState<PriceData>()
     const {coinId} = useParams();
     const location = useLocation();
     const match = useMatch("/:coinId/:tabs");
     const state = location.state as RouteState;
-    useEffect(() => {
-        (async () => {
-            const infoData = await (await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`)).json();
-            const priceData = await (await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`)).json();
-            setInfo(infoData);
-            setPriceInfo(priceData);
-            setLoading(false)
-        })()
-    }, [coinId])
+    const {
+        isLoading: infoLoading,
+        data: infoData
+    } = useQuery<InfoData>(["info", coinId], () => fetchCoinInfo(coinId as string))
+    const {
+        isLoading: tickersLoading,
+        data: tickerData
+    } = useQuery<PriceData>(["tickers", coinId], () => fetchTickers(coinId as string))
+    const loading = infoLoading || tickersLoading
+    // const [loading, setLoading] = useState(true)
+    // const [info, setInfo] = useState<InfoData>()
+    // const [priceInfo, setPriceInfo] = useState<PriceData>()
+    // useEffect(() => {
+    //     (async () => {
+    //         const infoData = await (await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`)).json();
+    //         const priceData = await (await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`)).json();
+    //         setInfo(infoData);
+    //         setPriceInfo(priceData);
+    //         setLoading(false)
+    //     })()
+    // }, [coinId])
     return (
         <Container>
+            <Helmet>
+                <title>{state?.name ? state?.name : (loading ? "Loading..." : infoData?.name)}</title>
+            </Helmet>
             <Header>
-                <Title>{state?.name ? state?.name : (loading ? "Loading..." : info?.name)}</Title>
+                <Title>{state?.name ? state?.name : (loading ? "Loading..." : infoData?.name)}</Title>
             </Header>
             {loading ? <Loader>Loading...</Loader> : (
                 <>
                     <OverView>
                         <OverViewItem>
                             <span>Rank</span>
-                            <span>{info?.rank}</span>
+                            <span>{infoData?.rank}</span>
                         </OverViewItem>
                         <OverViewItem>
                             <span>Symbol</span>
-                            <span>{info?.symbol}</span>
+                            <span>{infoData?.symbol}</span>
                         </OverViewItem>
                         <OverViewItem>
-                            <span>OpenSource</span>
-                            <span>{info?.open_source ? "YES" : "NO"}</span>
+                            <span>Price</span>
+                            <span>{tickerData?.quotes.USD.price.toFixed(3)}</span>
                         </OverViewItem>
                     </OverView>
                     <Description>
-                        {info?.description}
+                        {infoData?.description}
                     </Description>
                     <OverView>
                         <OverViewItem>
-                            <span>Total Suply:</span>
-                            <span>{priceInfo?.total_supply}</span>
+                            <span>Total Supply:</span>
+                            <span>{tickerData?.total_supply}</span>
                         </OverViewItem>
                         <OverViewItem>
                             <span>Max Supply:</span>
-                            <span>{priceInfo?.max_supply}</span>
+                            <span>{tickerData?.max_supply}</span>
                         </OverViewItem>
                     </OverView>
                     <Tabs>
                         <Tab isActive={match?.params.tabs === "price"}>
-                            <Link to={`/${coinId}/price`} >PRICE</Link>
+                            <Link to={`/${coinId}/price`}>PRICE</Link>
                         </Tab>
                         <Tab isActive={match?.params.tabs === "chart"}>
-                            <Link to={`/${coinId}/chart`} >CHART</Link>
+                            <Link to={`/${coinId}/chart`} state={coinId}>CHART</Link>
                         </Tab>
                     </Tabs>
-                    <Outlet />
+                    <Outlet context={{coinId}}/>
                 </>
             )}
         </Container>
