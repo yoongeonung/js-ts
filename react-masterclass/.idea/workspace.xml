@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7bd7a1c7-1a39-462a-920a-b1637cbbc3e0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/TodoLIst.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TodoLIst.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Todo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Todo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TodoLIst.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TodoLIst.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +44,7 @@
     <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs_interpreter_path" value="$USER_HOME$/.nvm/versions/node/v16.15.1/bin/node" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -90,7 +90,9 @@
       <workItem from="1656165431719" duration="5722000" />
       <workItem from="1656211115929" duration="5719000" />
       <workItem from="1656313408467" duration="6451000" />
-      <workItem from="1656394557049" duration="5366000" />
+      <workItem from="1656394557049" duration="6779000" />
+      <workItem from="1656424934450" duration="57000" />
+      <workItem from="1656425498060" duration="1376000" />
     </task>
     <servers />
   </component>
