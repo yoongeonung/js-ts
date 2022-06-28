@@ -1,5 +1,5 @@
 import {createGlobalStyle} from "styled-components";
-import TodoLIst from "./TodoLIst";
+import TodoLIst from "./components/TodoLIst";
 
 const GlobalStyle = createGlobalStyle`
 `;
