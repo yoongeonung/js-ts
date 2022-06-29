@@ -1,7 +1,7 @@
 import React from "react";
 import {useForm} from "react-hook-form";
-import {useSetRecoilState} from "recoil";
-import {Category, toDoState} from "../atoms";
+import {useRecoilValue, useSetRecoilState} from "recoil";
+import {categoryState, toDoState} from "../atoms";
 
 
 interface TodoForm {
@@ -10,9 +10,10 @@ interface TodoForm {
 
 function CreateTodo() {
     const setTodo = useSetRecoilState(toDoState);
+    const category = useRecoilValue(categoryState);
     const {register, handleSubmit, formState: {errors}, setValue} = useForm<TodoForm>();
     const onSubmit = (data: TodoForm) => {
-        setTodo(prev => [...prev, {id: Date.now(), text: data.todo, category: Category.TODO}]);
+        setTodo(prev => [...prev, {id: Date.now(), text: data.todo, category}]);
         setValue("todo", "");
     }
     return (
