@@ -1,4 +1,4 @@
-import {atom} from "recoil";
+import {atom, selector} from "recoil";
 
 export enum Category {
     TODO = "TODO",
@@ -16,3 +16,18 @@ export const toDoState = atom<ITodo[]>({
     key: "todo",
     default: []
 });
+
+export const toDoSelector = selector({
+    key: "toDoSelector",
+    get: ({get}) => {
+        const todos = get(toDoState);
+        return (
+            [
+                todos.filter(todo => todo.category === Category.TODO),
+                todos.filter(todo => todo.category === Category.DOING),
+                todos.filter(todo => todo.category === Category.DONE),
+            ]
+
+        )
+    }
+})

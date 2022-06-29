@@ -3,9 +3,15 @@ import {Category, ITodo, toDoState} from "../atoms";
 import {useSetRecoilState} from "recoil";
 
 
-function Todo({text, category}: ITodo) {
+function Todo({id,text, category}: ITodo) {
     const setTodos = useSetRecoilState(toDoState);
     const onClick = (clickedCategory : Category) => {
+        setTodos(prev => {
+            const index = prev.findIndex(v => v.id === id);
+            const front = prev.slice(0, index);
+            const back = prev.slice(index + 1);
+            return [...front, {id, text, category: clickedCategory}, ...back];
+        })
     }
     return (
         <li>
