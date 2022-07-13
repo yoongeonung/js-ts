@@ -1,7 +1,9 @@
+import Layout from "../components/Layout";
+
 export default function App({Component, pageProps}) {
     return (
-        <>
-            <h1>is it work</h1>
+        <Layout>
             <Component {...pageProps} />
-        </>);
+        </Layout>
+    );
 }
