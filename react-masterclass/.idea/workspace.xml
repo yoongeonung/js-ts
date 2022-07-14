@@ -6,6 +6,8 @@
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/atoms.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/atoms.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/style.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/theme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/theme.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +112,7 @@
       <workItem from="1657550698023" duration="1136000" />
       <workItem from="1657579454771" duration="1433000" />
       <workItem from="1657717284932" duration="120000" />
-      <workItem from="1657758326895" duration="5821000" />
+      <workItem from="1657758326895" duration="15564000" />
     </task>
     <servers />
   </component>
