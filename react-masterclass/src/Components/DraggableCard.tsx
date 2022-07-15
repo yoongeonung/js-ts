@@ -11,16 +11,17 @@ const Card = styled.div`
 `;
 
 interface DraggableCardProp {
-    toDo: string,
+    toDoId: number,
+    toDoText: string;
     index: number
 }
 
-function DraggableCard({toDo, index}:DraggableCardProp) {
-    return <Draggable key={toDo} draggableId={toDo} index={index}>
+function DraggableCard({toDoId, toDoText, index}:DraggableCardProp) {
+    return <Draggable key={toDoId} draggableId={String(toDoId)} index={index}>
         {(provided) => (
             <Card {...provided.draggableProps} {...provided.dragHandleProps}
                   ref={provided.innerRef}>
-                {toDo}
+                {toDoText}
             </Card>
         )}
     </Draggable>
