@@ -11,21 +11,35 @@ const Wrapper = styled.div`
   min-height: 200px;
 `;
 
+const Title = styled.h2`
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 18px;
+`;
+
 interface BoardProps {
     toDos: string[];
+    boardId: string;
+
 }
 
-function Board({toDos}:BoardProps) {
-    return <Droppable droppableId={'one'}>
-        {(provided) => {
-            return <Wrapper ref={provided.innerRef} {...provided.droppableProps}>
-                {toDos.map((toDo, index) => {
-                    return <DraggableCard toDo={toDo} key={toDo} index={index} />
-                })}
-                {provided.placeholder}
-            </Wrapper>
-        }}
-    </Droppable>
+function Board({toDos, boardId}: BoardProps) {
+    return (<Wrapper>
+        <Title>{boardId}</Title>
+        <Droppable droppableId={boardId}>
+            {(provided) => {
+                return (
+                    <div ref={provided.innerRef} {...provided.droppableProps}>
+                        {toDos.map((toDo, index) => {
+                            return <DraggableCard toDo={toDo} key={toDo} index={index}/>
+                        })}
+                        {provided.placeholder}
+                    </div>)
+            }}
+        </Droppable>
+    </Wrapper>)
+
 }
 
 export default Board;

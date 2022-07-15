@@ -4,6 +4,7 @@
     <list default="true" id="7bd7a1c7-1a39-462a-920a-b1637cbbc3e0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Board.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Board.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/atoms.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/atoms.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -109,7 +110,7 @@
       <workItem from="1657550698023" duration="1136000" />
       <workItem from="1657579454771" duration="1433000" />
       <workItem from="1657717284932" duration="120000" />
-      <workItem from="1657758326895" duration="17480000" />
+      <workItem from="1657758326895" duration="20984000" />
     </task>
     <servers />
   </component>
