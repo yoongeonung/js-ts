@@ -14,7 +14,7 @@ function logTextLength<T extends LengthType>(text: T){
     return text;
 }
 
-logTextLength(10);
+// logTextLength(10);
 
 interface ShoppingItem {
     name: string,

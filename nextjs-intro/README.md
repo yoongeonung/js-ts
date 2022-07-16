@@ -1,2 +1,0 @@
-# Nextjs-intro
-
