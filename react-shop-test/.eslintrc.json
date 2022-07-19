@@ -1,0 +1,31 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "react-app", // 추가
+        "react-app/jest", // 추가
+        "plugin:testing-library/react", // 추가
+        "plugin:jest-dom/recommended" // 추가
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "@typescript-eslint",
+        "testing-library", // 추가
+        "jest-dom" // 추가
+    ],
+    "rules": {
+    }
+}
