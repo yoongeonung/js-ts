@@ -1,0 +1,39 @@
+.itemImg {
+    display: block;
+    margin: 0 auto 25px;
+    width: 150px;
+    height: 150px;
+    box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, .2);
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.itemName {
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.itemCategory {
+    display: block;
+    text-align: center;
+}
+
+.itemPrice {
+    display: block;
+    text-align: center;
+    color: cadetblue;
+    padding: 20px 0;
+}
+
+.categoryDivider {
+    border: 0 solid rgba(0, 0, 0, 1);
+    border-left-width: 2px;
+    margin: 0 5px;
+}
+
+.detailLink {
+    text-decoration: none;
+    color: black;
+}
