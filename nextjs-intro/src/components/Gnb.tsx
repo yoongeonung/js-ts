@@ -1,19 +1,29 @@
-import {Menu} from "semantic-ui-react";
+import {Menu, MenuItemProps} from "semantic-ui-react";
 import {useRouter} from "next/router";
+import * as React from "react";
+
 
 export default function Gnb() {
     const router = useRouter();
     let activeName: string;
     if (router.pathname === "/") {
         activeName = 'home';
-    }else {
+    } else {
         activeName = 'about';
     }
-    const onClickGnB = (e, data) => {
-        if (data.name === 'home') {
-            router.push('/');
-        }else{
-            router.push('/about')
+    const onClickGnB = (event:React.MouseEvent<HTMLAnchorElement>, data:MenuItemProps) => {
+        switch (data.name) {
+            case "home":
+                router.push('/');
+                break;
+            case "about":
+                router.push('/about');
+                break;
+            case "contact us":
+                router.push('/contact-us');
+                break;
+            default:
+                router.push('/')
         }
     };
     return (
@@ -26,6 +36,11 @@ export default function Gnb() {
             <Menu.Item
                 name='about'
                 active={activeName === 'about'}
+                onClick={onClickGnB}
+            />
+            <Menu.Item
+                name='contact us'
+                active={activeName === 'contact us'}
                 onClick={onClickGnB}
             />
         </Menu>
