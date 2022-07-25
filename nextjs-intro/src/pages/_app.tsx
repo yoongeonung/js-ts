@@ -1,8 +1,8 @@
-import '../styles/globals.css'
+import '../../styles/globals.css'
 import type {AppProps} from 'next/app'
-import Footer from "../src/components/Footer";
+import Footer from "../components/Footer";
 import 'semantic-ui-css/semantic.min.css'
-import Top from "../src/components/Top";
+import Top from "../components/Top";
 
 function MyApp({Component, pageProps}: AppProps) {
     return (

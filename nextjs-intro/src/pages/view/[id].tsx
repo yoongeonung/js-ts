@@ -1,6 +1,6 @@
 import axios from "axios";
-import {ItemProp} from "../../src/components/ItemList";
-import Item from "../../src/components/Item";
+import {ItemProp} from "../../components/ItemList";
+import Item from "../../components/Item";
 
 interface DetailProps {
     item: ItemProp;
